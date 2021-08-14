@@ -42,15 +42,15 @@ public class PersonService {
         return this.createMessageResponse(savedPerson.getId(), "Save person with ID ");
     }
 
-//    public MessageResponseDTO updateById(Long id, PersonDTO personDTO) throws PersonNotFoundException {
-//        this.verifyIfExists(id);
-//
-//        Person personEntity = personMapper.toModel(personDTO);
-//
-//        Person updatedPerson = this.personRepository.save(personEntity);
-//
-//        return this.createMessageResponse(id, "Updated person with ID ");
-//    }
+    public MessageResponseDTO updateById(Long id, PersonDTO personDTO) throws PersonNotFoundException {
+        this.verifyIfExists(id);
+
+        Person personEntity = personMapper.toModel(personDTO);
+
+        Person updatedPerson = this.personRepository.save(personEntity);
+
+        return this.createMessageResponse(id, "Updated person with ID ");
+    }
 
     public void deleteById(Long id) throws PersonNotFoundException {
         this.verifyIfExists(id);
