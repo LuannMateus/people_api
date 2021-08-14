@@ -3,6 +3,7 @@ package com.luan.personApi.service;
 import com.luan.personApi.dto.MessageResponseDTO;
 import com.luan.personApi.dto.entityDTO.PersonDTO;
 import com.luan.personApi.entity.Person;
+import com.luan.personApi.error.PersonNotFoundException;
 import com.luan.personApi.mapper.PersonMapper;
 import com.luan.personApi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,12 @@ public class PersonService {
         List<Person> allPersons = this.personRepository.findAll();
 
         return allPersons.stream().map(personMapper::toDTO).collect(Collectors.toList());
+    }
+
+    public PersonDTO findById(Long id) throws PersonNotFoundException {
+        Person person = this.personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException(id));
+
+        return personMapper.toDTO(person);
     }
 
     public MessageResponseDTO save(PersonDTO personDTO) {

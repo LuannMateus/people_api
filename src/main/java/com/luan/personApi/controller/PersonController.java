@@ -3,6 +3,7 @@ package com.luan.personApi.controller;
 import com.luan.personApi.dto.MessageResponseDTO;
 import com.luan.personApi.dto.entityDTO.PersonDTO;
 import com.luan.personApi.entity.Person;
+import com.luan.personApi.error.PersonNotFoundException;
 import com.luan.personApi.service.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class PersonController {
         List<PersonDTO> allPersonsDTO = this.personService.findAll();
 
         return ResponseEntity.ok().body(allPersonsDTO);
+    }
+
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
+        return this.personService.findById(id);
     }
 
     @PostMapping
