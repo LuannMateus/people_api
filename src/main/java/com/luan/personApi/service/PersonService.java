@@ -45,8 +45,13 @@ public class PersonService {
                 .build();
     }
 
-    private Person verifyIfExists(Long id) throws PersonNotFoundException {
-        return this.personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException(id));
+    public void deleteById(Long id) throws PersonNotFoundException {
+        this.verifyIfExists(id);
+        personRepository.deleteById(id);
+    }
+
+    private void verifyIfExists(Long id) throws PersonNotFoundException {
+        this.personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException(id));
     }
 
 
