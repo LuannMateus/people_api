@@ -5,6 +5,8 @@ import com.luan.personApi.dto.entityDTO.PersonDTO;
 import com.luan.personApi.entity.Person;
 import com.luan.personApi.error.PersonNotFoundException;
 import com.luan.personApi.service.PersonService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +16,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/people")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 
     private final PersonService personService;
-
-    private PersonController(PersonService personService) {
-        this.personService = personService;
-    }
 
     @GetMapping
     public ResponseEntity<List<PersonDTO>> findAll() {
